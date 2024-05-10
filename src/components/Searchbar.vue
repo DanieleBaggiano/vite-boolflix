@@ -25,20 +25,6 @@ export default {
            console.log(this.store.movieList);
         })
         },
-        searchAPI() {
-        //     axios
-        // .get("https://api.themoviedb.org/3/search/movie", {
-        //   params: {
-        //     api_key: this.store.apiKey,
-        //     query: this.store.searchQuery,
-        //   }
-        // })
-        // .then((resp) => {
-        //  console.log(resp);
-        //    this.store.movieList = resp.data.results;
-        //    console.log(this.store.movieList);
-        // })
-        }
     }
 }
 </script>
