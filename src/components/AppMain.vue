@@ -20,18 +20,8 @@ export default {
                 'en': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png',
                 'ru': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/1280px-Flag_of_Russia.svg.png',
             }
-            return flagMap[img] || 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/2000px-Flag_of_Italy.svg.png';
+            return flagMap[img] || '/src/assets/sfondo.png';
         },
-        // getVote(vote) {
-        //     let maxStars = 5;
-        //     let stars = Math.ceil(vote / 2);
-        //     let fullStars = stars;
-        //     let emptyStars = maxStars - stars
-        //     return {
-        //         fullStars,
-        //         emptyStars,
-        //     };
-        // },
         getFull(vote) {
             return Math.ceil(vote / 2);
         },
@@ -46,21 +36,21 @@ export default {
 
 <template>
     <div class="container">
-        <div v-for="movie in store.movieList" :value="movie" class="card">
+        <div v-for="(movie) in store.movieList" :value="movie" class="card">
             <img :src="getPosterUrl(movie.poster_path)" alt="">
             <div class="title">
-                <h2>{{ movie.title}}</h2>
+                <h2>{{ movie.title }}</h2>
+                <h2>{{ movie.name }}</h2>
                 <h3>{{ movie.original_title }}</h3>
+                <h3>{{ movie.original_name }}</h3>
                 <img class="flag" :src="getFlag(movie.original_language)" alt="">
+                <span>{{ movie.original_language }}</span>
 
                 <div class="stars">
-                    <!-- stella piena -->
                     <i v-for="star in getFull(movie.vote_average)" :key="star" class="fa-solid fa-star"></i>
-                               
-                    <!-- stella vuota -->
+
                     <i v-for="star in getEmpty(movie.vote_average)" :key="star" class="fa-regular fa-star"></i>
                 </div>
-                <!-- <span>{{ getVote(movie.vote_average) }}</span> -->
             </div>
         </div>
     </div>
@@ -72,33 +62,36 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    background-color: rgb(67 67 67);
+    padding: 50px;
+    min-height: 100vh;
 
     .card {
-       width: 200px;
-       height: 400px;
-       border: 1px solid black;
-       overflow: hidden;
-       position: relative;
-   
-       img {
-       object-fit: cover;
-       width: 100%;
-       height: 100%;
-       }
-     
-       &:hover .title {
-         position: absolute;
-         top: 0;
-         color: white;
-         background-color: rgba(0, 0, 0, .5);
-         width: 100%;
-         height: 100%;
+        width: 200px;
+        height: 400px;
+        border: 1px solid black;
+        overflow: hidden;
+        position: relative;
 
-         .flag{ 
-            width: 60px;
-            height: 30px;
-         }
-       }
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        &:hover .title {
+            position: absolute;
+            top: 0;
+            color: white;
+            background-color: rgba(0, 0, 0, .5);
+            width: 100%;
+            height: 100%;
+
+            .flag {
+                width: 60px;
+                height: 30px;
+            }
+        }
     }
 }
 </style>
